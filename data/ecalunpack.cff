@@ -1,0 +1,24 @@
+include "EventFilter/EcalRawToDigiDev/data/EcalUnpackerData.cfi"
+
+# special case for GREA: since a supermodule is attached to a fed with non standatd fed_id
+     replace ecalEBunpacker.FEDs = {643}
+     replace ecalEBunpacker.orderedFedList = {643}
+     replace ecalEBunpacker.orderedDCCIdList = {41}
+
+include "CalibCalorimetry/EcalLaserCorrection/data/ecalLaserCorrectionService.cfi"
+
+es_source = EcalTrivialConditionRetriever {
+ untracked double adcToGeVEBConstant = 0.00875
+ untracked vdouble amplWeights = { -0.333, -0.333, -0.333,
+                                    0.000,  0.000,  1.000,
+                                    0.000,  0.000,  0.000,  0.000 }
+ untracked vdouble pedWeights  = {  0.333,  0.333,  0.333,
+                                    0.000,  0.000,  0.000,
+                                    0.000,  0.000,  0.000,  0.000 }
+ untracked vdouble jittWeights = {  0.040,  0.040,  0.040,
+                                    0.000,  1.320, -0.050,
+                                   -0.500, -0.500, -0.400,  0.000 }
+}
+
+sequence ecalunpack = {ecalEBunpacker}
+

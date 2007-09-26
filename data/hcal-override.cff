@@ -1,0 +1,23 @@
+
+replace hbhereco.firstSample = 1
+replace hbhereco.samplesToAdd = 8
+replace hbhereco.digiLabel = hcalunpacker
+replace hbhereco.correctForTimeslew = false
+replace hbhereco.correctForPhaseContainment = false
+replace hbhereco.correctionPhaseNS = 0.
+
+
+replace horeco.firstSample = 1
+replace horeco.samplesToAdd = 8
+replace horeco.digiLabel = hcalunpacker
+replace horeco.correctForTimeslew = false
+replace horeco.correctForPhaseContainment = false
+replace horeco.correctionPhaseNS = 0.
+
+replace hfreco.firstSample = 1
+replace hfreco.samplesToAdd = 8
+replace hfreco.digiLabel = hcalunpacker
+replace hfreco.correctForTimeslew = false
+replace hfreco.correctForPhaseContainment = false
+replace hfreco.correctionPhaseNS = 0.
+

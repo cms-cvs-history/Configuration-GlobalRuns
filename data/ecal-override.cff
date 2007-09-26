@@ -1,0 +1,2 @@
+ replace ecalWeightUncalibRecHit.EBdigiCollection = ecalEBunpacker:ebDigis
+ replace ecalWeightUncalibRecHit.EEdigiCollection = ecalEBunpacker:eeDigis

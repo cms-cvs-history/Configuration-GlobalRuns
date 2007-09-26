@@ -1,0 +1,30 @@
+module hcalunpacker = HcalRawToDigi {
+ InputTag InputLabel = source
+ int32 firstSample = 0
+ int32 lastSample = 9
+ bool FilterDataQuality = true
+ untracked bool UnpackCalib = false
+ untracked bool ComplainEmptyData = false
+ untracked bool ExceptionEmptyData = false
+}
+
+es_module = HcalDbProducer {}
+es_source es_hardcode = HcalHardcodeCalibrations { 
+ untracked vstring toGet = {
+  "Pedestals", 
+  "PedestalWidths", 
+  "Gains", 
+  "GainWidths",
+  "QIEShape",
+  "QIEData", 
+  "ChannelQuality"
+}}
+
+es_source es_ascii = HcalTextCalibrations {
+ VPSet input = {{
+  string object = "ElectronicsMap"
+  FileInPath file = "Configuration/GlobalRuns/data/official_emap_16x_v1.txt"
+ }}
+}
+
+sequence hcalunpack = {hcalunpacker}
