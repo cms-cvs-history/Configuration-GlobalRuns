@@ -1,31 +1,26 @@
-# include "CondCore/DBCommon/data/CondDBSetup.cfi"
 
-module muonDTDigis = DTUnpackingModule {
- untracked int32 eventScanning = 1000
- string dataType = "DDU"
- untracked bool debugMode = false
- untracked bool performDataIntegrityMonitor = false
- untracked bool isRaw = false
- untracked bool writeSC = true
- untracked bool globalDAQ = true
- untracked int32 dduID = 770
-}
+    module dtunpacker = DTUnpackingModule {
+	string dataType = "DDU"
+	PSet readOutParameters = {
+	    untracked bool localDAQ = false
+	    untracked bool performDataIntegrityMonitor = false
+	    untracked bool debug = false
+	    PSet rosParameters = {
+		untracked bool localDAQ = false
+		untracked bool readingDDU = true
+		untracked bool writeSC = true
+		untracked bool readDDUIDfromDDU = true
+		untracked bool performDataIntegrityMonitor = false
+		untracked bool debug = false
+	    }
+	}
+	PSet rosParameters = {
+	    untracked bool localDAQ = false
+	    untracked bool readingDDU = true
+	}
+    }
 
-# ES-Source's 
-es_source roMapping = PoolDBESSource { 
- using CondDBSetup    
- string connect = "frontier://FrontierOn/CMS_COND_DT"
-# untracked string catalog = "relationalcatalog_oracle://orcon/CMS_COND_GENERAL"
-untracked bool siteLocalConfig = true
- string timetype = "runnumber"    
-    VPSet toGet = {
-            { string record = "DTReadOutMappingRcd"
-                string tag = "DTChannelsMap" },
-            { string record = "DTT0Rcd"
-                string tag = "t0_SecTestYB0" },
-            { string record = "DTTtrigRcd"
-                string tag = "GREAtTrig" }
-        }
-}
-    
-sequence dtunpack = {muonDTDigis}
+
+
+
+sequence dtunpack = {dtunpacker}
