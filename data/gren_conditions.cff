@@ -1,0 +1,207 @@
+    es_source HCALCalibration = HcalHardcodeCalibrations {
+	untracked vstring toGet = { "ChannelQuality", "GainWidths" }
+    }
+    es_source L1GtBoardMapsRcdSource = EmptyESSource {
+	string recordName = "L1GtBoardMapsRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1GtParametersRcdSource = EmptyESSource {
+	string recordName = "L1GtParametersRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1GtPrescaleFactorsRcdSource = EmptyESSource {
+	string recordName = "L1GtPrescaleFactorsRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1GtStableParametersRcdSource = EmptyESSource {
+	string recordName = "L1GtStableParametersRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1GtTriggerMaskRcdSource = EmptyESSource {
+	string recordName = "L1GtTriggerMaskRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1MuGMTParametersRcdSource = EmptyESSource {
+	string recordName = "L1MuGMTParametersRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    es_source L1MuGMTScalesRcdSource = EmptyESSource {
+	string recordName = "L1MuGMTScalesRcd"
+	bool iovIsRunNotTime = true
+	vuint32 firstValid = { 1 }
+    }
+    include "L1TriggerConfig/L1ScalesProducers/data/L1MuTriggerScalesConfig.cff"
+
+    es_source cscConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_CSC"
+	PSet DBParameters = {
+	    untracked int32 messageLevel = 0
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	}
+	VPSet toGet = {
+	    { string record = "CSCDBGainsRcd"
+		string tag = "CSCDBGains_ideal" },
+	    { string record = "CSCDBCrosstalkRcd"
+		string tag = "CSCDBCrosstalk_ideal" },
+	    { string record = "CSCDBNoiseMatrixRcd"
+		string tag = "CSCDBNoiseMatrix_ideal" },
+	    { string record = "CSCDBPedestalsRcd"
+		string tag = "CSCDBPedestals_ideal" },
+	    { string record = "CSCChamberIndexRcd"
+		string tag = "CSCChamberIndex" },
+	    { string record = "CSCChamberMapRcd"
+		string tag = "CSCChamberMap" },
+	    { string record = "CSCCrateMapRcd"
+		string tag = "CSCCrateMap" },
+	    { string record = "CSCDDUMapRcd"
+		string tag = "CSCDDUMap" }
+	}
+    }
+    es_source dtConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_DT"
+	PSet DBParameters = {
+	    untracked int32 messageLevel = 0
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	}
+	VPSet toGet = {
+	    { string record = "DTReadOutMappingRcd"
+		string tag = "GRENmap_774" },
+	    { string record = "DTT0Rcd"
+		string tag = "GRENt0" },
+	    { string record = "DTTtrigRcd"
+		string tag = "GRENttrigTest" }
+	}
+    }
+    es_source ecalMapping = EmptyESSource {
+      string recordName = "EcalMappingRcd"
+      bool iovIsRunNotTime = false
+      vuint32 firstValid = { 0 }
+    }
+    include "Geometry/EcalMapping/data/EcalMapping.cfi"
+    #es_module ecalBarrelGeometry = EcalBarrelGeometryEP {}
+    #es_module ecalEndcapGeometry = EcalEndcapGeometryEP {}
+
+
+    es_source ecalConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_ECAL"
+	PSet DBParameters = {
+	    untracked int32 messageLevel = 0
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	}
+	VPSet toGet = {
+	    { string record = "EcalIntercalibConstantsRcd"
+		string tag = "EcalIntercalibConstants_CosmGain200" },
+	    { string record = "EcalPedestalsRcd"
+		string tag = "EcalPedestals_online" },
+	    { string record = "EcalADCToGeVConstantRcd"
+		string tag = "EcalADCToGeVConstant_CosmGain200" },
+	    { string record = "EcalGainRatiosRcd"
+		string tag = "EcalGainRatios_trivial" },
+	    { string record = "EcalWeightXtalGroupsRcd"
+		string tag = "EcalWeightXtalGroups_trivial" },
+	    { string record = "EcalTBWeightsRcd"
+		string tag = "EcalTBWeights_trivial" },
+	    { string record = "EcalLaserAlphasRcd"
+		string tag = "EcalLaserAlphas_trivial" },
+	    { string record = "EcalLaserAPDPNRatiosRcd"
+		string tag = "EcalLaserAPDPNRatios_trivial" },
+	    { string record = "EcalLaserAPDPNRatiosRefRcd"
+		string tag = "EcalLaserAPDPNRatiosRef_trivial" }
+	}
+    }
+    include "CalibCalorimetry/EcalLaserCorrection/data/ecalLaserCorrectionService.cfi"
+
+
+    es_source hcalConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_HCAL"
+	PSet DBParameters = {
+	    untracked int32 messageLevel = 0
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	}
+	VPSet toGet = {
+	    { string record = "HcalPedestalsRcd"
+		string tag = "hcal_pedestals_fC_gren" },
+	    { string record = "HcalElectronicsMapRcd"
+		string tag = "official_emap_16x_v2" },
+	    { string record = "HcalGainsRcd"
+		string tag = "hcal_gains_v1" },
+	    { string record = "HcalQIEDataRcd"
+		string tag = "qie_normalmode_v3" },
+	    { string record = "HcalPedestalWidthsRcd"
+		string tag = "hcal_widths_fC_gren" }
+	}
+    }
+    es_module hcal_db_producer = HcalDbProducer {
+       untracked vstring dump = { "" }
+    }
+
+    es_source rpcConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_RPC"
+	PSet DBParameters = {
+	    untracked int32 messageLevel = 0
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	}
+	VPSet toGet = {
+	    { string record = "RPCEMapRcd"
+		string tag = "RPCEMap_v2" }
+	}
+    }
+    es_source siPixelConditions = PoolDBESSource {
+	string timetype = "runnumber"
+	string connect = "frontier://FrontierOn/CMS_COND_ON_170_PIXEL"
+	PSet DBParameters = {
+	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+	    untracked int32 messageLevel = 0
+	    untracked bool loadBlobStreamer = false
+	    untracked int32 connectionTimeOut = 600
+	    untracked int32 connectionRetrialPeriod = 30
+	    untracked int32 connectionRetrialTimeOut = 180
+	    untracked bool enableConnectionSharing = false
+	    untracked bool enableReadOnlySessionOnUpdateConnection = false
+	    untracked bool enablePoolAutomaticCleanUp = false
+	}
+	VPSet toGet = {
+	    { string record = "SiPixelFedCablingMapRcd"
+		string tag = "SiPixelFedCablingMap_v9" }
+	}
+    }
+
+
+  es_source siTrackerConditions = PoolDBESSource {
+    string timetype = "runnumber"
+    string connect = "frontier://FrontierOn/CMS_COND_ON_170_STRIP"
+    untracked string BlobStreamerName = "TBufferBlobStreamingService"
+    PSet DBParameters = {
+      untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
+      untracked int32 messageLevel = 2
+    }
+    VPSet toGet = {
+      { string record = "SiStripPedestalsRcd"
+        string tag = "SiStripPedestals_GREN_v1" },
+      { string record = "SiStripNoisesRcd"
+        string tag = "SiStripNoise_GREN_v1" },
+      { string record = "SiStripFedCablingRcd"
+        string tag = "SiStripCabling_GREN_v1" }
+    }
+  }
+  es_source SiStripGainFakeESSource = SiStripGainFakeESSource {
+    FileInPath file = "CalibTracker/SiStripCommon/data/SiStripDetInfo.dat"
+  }
+  es_module SiStripGainESProducer = SiStripGainESProducer {
+    bool AutomaticNormalization = false
+    double NormalizationFactor = 1.0
+  }
+
+
+

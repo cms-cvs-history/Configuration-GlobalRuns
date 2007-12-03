@@ -1,0 +1,62 @@
+    es_module l1GtBoardMaps = L1GtBoardMapsTrivialProducer {
+	vstring BoardList = { "GTFE", "FDL", "PSB", "PSB", "PSB", "PSB", "PSB", "PSB", "PSB", "GMT", "TCS", "TIM" }
+	vint32 BoardIndex = { 0, 0, 0, 1, 2, 3, 4, 5, 6, 0, 0, 0 }
+	vint32 BoardIndexDaqRecord = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -1, -1 }
+	vint32 BoardIndexEvmRecord = { 1, 3, -1, -1, -1, -1, -1, -1, -1, -1, 2, -1 }
+	vint32 ActiveBoardsDaqRecord = { -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, -1, -1 }
+	vint32 ActiveBoardsEvmRecord = { -1, 0, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1 }
+	vint32 BoardSlotMap = { 17, 10, 9, 13, 14, 15, 19, 20, 21, 18, 7, 16 }
+	vint32 BoardHexNameMap = { 0, 253, 187, 187, 187, 187, 187, 187, 187, 221, 204, 173 }
+	vint32 CableList = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+	vstring CaloObjectInputMap = { "IsoEGQ", "NoIsoEGQ", "CenJetQ", "ForJetQ", "TauJetQ", "ESumsQ", "JetCountsQ", "Free", "Free", "Free" }
+	vint32 CaloInputToPsbMap = { 1, 1, 1, 1, 2, 2, 2, 2, 3, 3 }
+    }
+    es_module l1GtFactors = L1GtFactorsTrivialProducer {
+	vint32 PrescaleFactors = { 4000, 2000, 1, 1, 1, 1, 1, 10000, 1000, 100, 1, 1, 1, 1, 10000, 1000, 100, 100, 1, 1, 1, 100000, 100000, 10000, 10000, 100, 1, 1, 1, 100000, 100000, 10000, 1, 1000, 1000, 100, 1, 1000, 100, 1, 1, 1, 1, 10000, 1, 1, 1, 1, 1, 1, 1, 1000, 100, 100, 1, 1, 1, 1, 20, 1, 1, 1, 1, 1, 20, 1, 1, 1, 1, 1, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10000, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3000000, 3000000, 1000, 300, 1000, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+	vuint32 TriggerMask = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    }
+    es_module l1GtParameters = L1GtParametersTrivialProducer {
+	int32 TotalBxInEvent = 3
+	uint32 ActiveBoards = 0xffff
+    }
+    es_module l1GtStableParameters = L1GtStableParametersTrivialProducer {
+	uint32 NumberPhysTriggers = 128
+	uint32 NumberPhysTriggersExtended = 64
+	uint32 NumberTechnicalTriggers = 64
+	uint32 NumberL1Muons = 4
+	uint32 NumberL1EGamma = 4
+	uint32 NumberL1IsolatedEGamma = 4
+	uint32 NumberL1CentralJets = 4
+	uint32 NumberL1ForwardJets = 4
+	uint32 NumberL1TauJets = 4
+	uint32 NumberL1JetCounts = 12
+	uint32 NumberConditionChips = 2
+	uint32 PinsOnConditionChip = 96
+	int32 NumberPsbBoards = 7
+	int32 WordLength = 64
+	int32 UnitLength = 8
+	vint32 OrderConditionChip = { 2, 1 }
+    }
+
+
+
+  module muonDTTFDigis = DTTFFEDReader {}
+    module muonCSCTFDigis = CSCTFUnpacker {
+	untracked int32 MinBX = 3
+	untracked int32 MaxBX = 9
+	untracked vint32 slot2sector = { 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    }
+    module gctDigis = GctRawToDigi {
+	InputTag inputLabel = source
+	int32 gctFedId = 745
+    }
+    module gtDigis = L1GlobalTriggerRawToDigi {
+	untracked InputTag DaqGtInputTag = source
+	untracked int32 DaqGtFedId = 813
+	uint32 ActiveBoardsMask = 65535
+	int32 UnpackBxInEvent = -1
+    }
+
+
+#sequence l1unpack =  { muonDTTFDigis & muonCSCTFDigis & gctDigis & gtDigis }
+sequence l1unpack =  { muonDTTFDigis & muonCSCTFDigis & gtDigis }

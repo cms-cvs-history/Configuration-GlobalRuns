@@ -1,0 +1,5 @@
+    module siPixelDigis = SiPixelRawToDigi {
+	untracked bool IncludeErrors = true
+    }
+
+sequence pixelunpack = {siPixelDigis}

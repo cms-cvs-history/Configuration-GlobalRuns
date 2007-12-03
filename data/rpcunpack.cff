@@ -1,0 +1,5 @@
+module muonRPCDigis = RPCUnpackingModule {
+  untracked InputTag InputLabel = source
+}
+
+sequence rpcunpack = {muonRPCDigis}
