@@ -128,19 +128,25 @@
 	    untracked int32 messageLevel = 0
 	    untracked string authenticationPath = "/afs/cern.ch/cms/DB/conddb"
 	}
-	VPSet toGet = {
-	    { string record = "HcalPedestalsRcd"
-		string tag = "hcal_pedestals_fC_gren" },
-	    { string record = "HcalElectronicsMapRcd"
-		string tag = "official_emap_16x_v2" },
-	    { string record = "HcalGainsRcd"
-		string tag = "hcal_gains_v1" },
-	    { string record = "HcalQIEDataRcd"
-		string tag = "qie_normalmode_v3" },
-	    { string record = "HcalPedestalWidthsRcd"
-		string tag = "hcal_widths_fC_gren" }
-	}
+        # Using Radek's latest updates to parameters (13 Feb 2008)
+        VPSet toGet = {
+	     { string record = "HcalPedestalsRcd"
+	         #string tag = "hcal_pedestals_fC_gren" },
+	         string tag = "hcal_pedestals_fC_gren_v2"},
+	     { string record = "HcalElectronicsMapRcd"
+	         #string tag = "official_emap_16x_v2" },
+	         string tag = "official_emap_v5_080208"},
+	     { string record = "HcalGainsRcd"
+	         #string tag = "hcal_gains_v1" },
+	         string tag = "hcal_gains_v2_cosmics_magoff_hbpscaled"},
+	     { string record = "HcalQIEDataRcd"
+	         string tag = "qie_normalmode_v3" },
+	     { string record = "HcalPedestalWidthsRcd"
+		 #string tag = "hcal_widths_fC_gren" }
+	         string tag = "hcal_widths_fC_gren_v2" }
+         }
     }
+
     es_module hcal_db_producer = HcalDbProducer {
        untracked vstring dump = { "" }
     }
