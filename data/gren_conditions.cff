@@ -138,7 +138,8 @@
 	         string tag = "official_emap_v5_080208"},
 	     { string record = "HcalGainsRcd"
 	         #string tag = "hcal_gains_v1" },
-	         string tag = "hcal_gains_v2_cosmics_magoff_hbpscaled"},
+	         #string tag = "hcal_gains_v2_cosmics_magoff_hbpscaled"},
+       	         string tag = "hcal_gains_v2_gren_reprocessing"},
 	     { string record = "HcalQIEDataRcd"
 	         string tag = "qie_normalmode_v3" },
 	     { string record = "HcalPedestalWidthsRcd"
