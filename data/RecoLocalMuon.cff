@@ -39,7 +39,7 @@ include "RecoLocalMuon/DTSegment/data/dt4DSegments_CombPatternReco4D_LinearDrift
 #include "RecoLocalMuon/CSCRecHit/data/csc2DRecHits.cfi"
 
 # new reconstruction using DB
-include "RecoLocalMuon/CSCRecHitB/data/cscRecHitB.cfi"
+include "RecoLocalMuon/CSCRecHitB/data/cscRecHitD.cfi"
 
 ## Segments
 include "RecoLocalMuon/CSCSegment/data/cscSegments.cfi"
