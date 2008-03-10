@@ -1,0 +1,51 @@
+
+
+# tracker
+include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
+include "RecoLocalTracker/SiStripZeroSuppression/data/SiStripZeroSuppression.cfi"
+include "RecoLocalTracker/SiStripClusterizer/data/SiStripClusterizer_RealData.cfi"
+sequence trackerGR = { siStripZeroSuppression,  siStripClusters }
+
+#
+### calorimeters
+#
+include "RecoLocalCalo/Configuration/data/RecoLocalCalo.cff"
+include "RecoEcal/Configuration/data/RecoEcal.cff"
+
+
+### ecal: no changes wrt standard modules
+    sequence ecal = {ecalWeightUncalibRecHit, ecalRecHit}
+    sequence ecalClustersGR = {islandClusteringSequence,hybridClusteringSequence}
+
+### hcal: many hacks. 
+include "Configuration/GlobalRuns/data/hcal-override.cff"
+    # hcalZeroSuppressedDigis is defined in hcal-override.cff. There is NO cfi in the
+    # release defining it... amazing!
+    # also the configuration of hb and ho are in hcal-override but in no cfi stored in CVS
+    sequence hcal = {hcalLocalRecoSequence}
+
+    sequence caloGR = { ecal, ecalClustersGR, hcal }
+
+
+#
+### muons
+include "RecoLocalMuon/Configuration/data/RecoLocalMuonCosmics.cff"
+include "RecoMuon/Configuration/data/RecoMuonCosmics.cff"
+    sequence muonsGR = {  muonlocalreco, muonrecoforcosmics  }
+
+#
+### jets
+#
+include "RecoJets/Configuration/data/RecoJets.cff"
+include "RecoJets/Configuration/data/CaloTowersRec.cff"
+#include "RecoMET/Configuration/data/RecoMET.cff"
+
+# Make jet parameter replacements suggested by Efe Yazgan on 11 Feb 2008
+include "Configuration/GlobalRuns/data/jet-override.cff"
+
+    sequence jetsGR = {caloTowersRec, recoJets}
+
+    sequence reconstructionGR = {caloGR, muonsGR,  jetsGR}
+#    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
+

@@ -1,0 +1,87 @@
+#
+# Tracker alignment
+#
+include "CalibTracker/Configuration/data/Tracker_FrontierAlignment.cff"
+#
+####################################################################################
+#
+# Muon alignment
+#
+include "CalibMuon/Configuration/data/Muon_FrontierAlignment.cff"
+#
+###################################################################
+#
+# Pixel calib
+#
+include "CalibTracker/Configuration/data/SiPixel_FrontierGain.cff"
+#
+###################################################################
+#
+# Strip calib
+#
+include "CalibTracker/Configuration/data/SiStrip_FrontierGain.cff"
+include "CalibTracker/Configuration/data/SiStrip_FrontierNoise.cff"
+include "CalibTracker/Configuration/data/SiStrip_FakePedestals.cff"
+include "CalibTracker/Configuration/data/SiStrip_FrontierLorentzAngle.cff"
+include "CalibTracker/SiStripESProducers/data/SiStripQualityFakeESSource.cfi"
+
+#############################################################################
+#
+# DT calib
+
+#include "CalibMuon/Configuration/data/DT_FrontierConditions.cff"
+include "CalibMuon/DTCalibration/data/DT_Calibration.cff"
+
+replace maps_frontier.connect="frontier://FrontierDev/CMS_COND_DT"
+replace maps_frontier.toGet = {
+ { string record = "DTReadOutMappingRcd"
+       string tag = "GRENmap_774" },
+   { string record = "DTT0Rcd"
+       string tag = "GRENt0" }  ,
+   { string record = "DTTtrigRcd"
+       string tag = "GRENttrigTest" } ,
+   {string record = "DTStatusFlagRcd"
+       string tag = "GRENnoise"}
+   }
+es_prefer maps_frontier = PoolDBESSource{}
+
+
+###########################################################################################
+#
+# CSC Calib OK (used also for digis)
+#
+# DBCOnditions use the new DB objects (linearized vectors)
+include "CalibMuon/Configuration/data/CSC_FrontierDBConditions.cff"
+
+
+###########################################################################################
+#
+# HCAL Frontier Conditions 
+#
+include "CalibCalorimetry/Configuration/data/Hcal_FrontierConditions.cff"
+
+###########################################################################################
+#
+# ECAL Frontier Conditions
+#
+include "CalibCalorimetry/Configuration/data/Ecal_FrontierConditions.cff"
+
+############################################################################################
+#
+## Btag conditions
+include "RecoBTag/Configuration/data/RecoBTag_FrontierConditions.cff"
+
+## Btau
+#
+include "RecoBTau/Configuration/data/RecoBTau_FrontierConditions.cff"
+
+## BeamSpot Conditions
+include "RecoVertex/BeamSpotProducer/data/BeamSpotEarlyCollision.cff"
+
+## HLT conditions
+
+include "HLTrigger/Configuration/data/rawToDigi/FrontierConditions.cff"
+
+
+
+

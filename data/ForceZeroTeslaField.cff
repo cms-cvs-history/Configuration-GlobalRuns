@@ -1,0 +1,11 @@
+   es_module localUniform = UniformMagneticFieldESProducer {
+      double ZFieldInTesla = 0.0
+    }
+
+   es_prefer localUniform = UniformMagneticFieldESProducer{}
+   es_prefer magfield = XMLIdealGeometryESSource{}
+  
+
+   replace SteppingHelixPropagatorAny.useMagVolumes = false
+   replace SteppingHelixPropagatorAlong.useMagVolumes = false
+   replace SteppingHelixPropagatorOpposite.useMagVolumes = false

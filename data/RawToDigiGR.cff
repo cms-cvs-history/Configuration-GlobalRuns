@@ -1,0 +1,76 @@
+#
+# David Lange, Bryan Dahmes LLNL
+# 30 April, 2007
+#
+#--- Allow for multiple calls to the database ---#
+include "CondCore/DBCommon/data/CondDBSetup.cfi" 
+
+#--- Geometry Setup ---#
+include "Geometry/CMSCommonData/data/cmsIdealGeometryXML.cfi"
+include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
+include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
+include "HLTrigger/Configuration/data/rawToDigi/EcalGeometrySetup.cff"
+include "Geometry/DTGeometry/data/dtGeometry.cfi"
+include "Geometry/RPCGeometry/data/rpcGeometry.cfi"
+
+#-------------------------#
+#--- RawToDigi modules ---#
+#-------------------------#
+#--- L1 Setup ---#
+include "L1TriggerConfig/L1ScalesProducers/data/L1MuTriggerScalesConfig.cff"
+include "L1TriggerConfig/L1ScalesProducers/data/L1MuGMTScalesConfig.cff"
+include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
+include "L1TriggerConfig/L1GtConfigProducers/data/L1GtConfig.cff"
+include "L1TriggerConfig/GMTConfigProducers/data/L1MuGMTParametersConfig.cff"
+#--- CSC TF ---#
+module l1CscTfEmulDigis = csctfunpacker from "EventFilter/CSCTFRawToDigi/data/csctfunpacker.cfi"
+#--- DT TF ---#
+module l1DttfEmulDigis = dttfunpacker from "EventFilter/DTTFRawToDigi/data/dttfunpacker.cfi"
+#--- GCT/GMT ---#
+module l1GctEmulDigis = l1GctHwDigis from "EventFilter/GctRawToDigi/data/l1GctHwDigis.cfi"
+module l1GmtEmulDigis = l1GtUnpack from "EventFilter/L1GlobalTriggerRawToDigi/data/l1GtUnpack.cfi"
+
+replace l1GmtEmulDigis.DaqGtInputTag = source
+
+#--- SiPixel ---#
+include "EventFilter/SiPixelRawToDigi/data/SiPixelRawToDigi.cfi"
+replace siPixelDigis.InputLabel = "source"
+#--- SiStrip ---#
+#workaround for still wrong label names 
+include "EventFilter/SiStripRawToDigi/data/SiStripDigis.cfi"
+replace SiStripDigis.ProductLabel = "source"
+#--- Ecal ---#
+include "SimCalorimetry/EcalTrigPrimProducers/data/ecalTriggerPrimitiveDigis.cff"
+module ecalDigis = ecalEBunpacker from "EventFilter/EcalRawToDigiDev/data/EcalUnpackerData.cfi"
+replace ecalDigis.DoRegional = false 
+#--- Ecal Preshower ---#
+module ecalPreshowerDigis = esRawToDigi from "EventFilter/ESRawToDigi/data/esRawToDigi.cfi"
+#--- Hcal ---#
+module hcalDigis = hcalDigis from "EventFilter/HcalRawToDigi/data/HcalRawToDigi.cfi"
+#--- CSC ---#
+module muonCSCDigis = muonCSCDigis from "EventFilter/CSCRawToDigi/data/cscUnpacker.cfi"
+replace muonCSCDigis.UseExaminer = false
+#--- DT ---#
+#module dtunpacker = muonDTDigis from "EventFilter/DTRawToDigi/data/dtunpacker.cfi"
+include "EventFilter/DTRawToDigi/data/dtunpacker.cfi"
+
+#--- RPC ---#
+module muonRPCDigis = rpcunpacker from "EventFilter/RPCRawToDigi/data/rpcUnpacker.cfi"
+
+sequence RawToDigi = { 
+                        l1CscTfEmulDigis &
+                        l1DttfEmulDigis &
+                        l1GctEmulDigis &
+                        l1GmtEmulDigis &
+                        siPixelDigis &
+                        SiStripDigis &
+                        ecalDigis &
+                        ecalPreshowerDigis &
+                        hcalDigis &
+                        muonCSCDigis &
+                        muonDTDigis &
+#                        dtunpacker &
+                        muonRPCDigis
+                     }
+
