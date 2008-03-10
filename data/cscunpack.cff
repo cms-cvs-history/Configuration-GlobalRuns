@@ -1,9 +1,0 @@
-    module muonCSCDigis = CSCDCCUnpacker {
-	untracked bool PrintEventNumber = false
-	untracked bool UseExaminer = false
-	untracked uint32 ExaminerMask = 0x7fb7bf6
-	untracked uint32 ErrorMask = 0xdfcfefff
-	InputTag InputObjects = source
-    }
-
-sequence cscunpack = {muonCSCDigis}

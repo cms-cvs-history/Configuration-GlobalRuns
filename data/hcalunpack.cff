@@ -1,8 +1,0 @@
-module hcalZeroSuppressedDigis = HcalRawToDigi {
-    InputTag InputLabel = source
-    int32 firstSample = 0
-    int32 lastSample = 9
-    bool FilterDataQuality = true
-}
-
-sequence hcalunpack = {hcalZeroSuppressedDigis}

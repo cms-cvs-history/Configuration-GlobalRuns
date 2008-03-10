@@ -1,4 +1,0 @@
- module SiStripDigis = SiStripRawToDigiModule {
- }
-
-sequence stripunpack = { SiStripDigis }
