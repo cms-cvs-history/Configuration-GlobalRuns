@@ -16,3 +16,4 @@ replace hfreco.correctForTimeslew = true
 replace hfreco.correctForPhaseContainment = true
 replace hfreco.correctionPhaseNS = 10.
 
+replace towerMaker.HOWeight=0.

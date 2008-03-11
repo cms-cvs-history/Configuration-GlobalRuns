@@ -63,7 +63,7 @@ sequence RawToDigi = {
                         l1DttfEmulDigis &
                         l1GctEmulDigis &
                         l1GmtEmulDigis &
-                        siPixelDigis &
+#                        siPixelDigis &
 #                        SiStripDigis &
                         ecalDigis &
                         ecalPreshowerDigis &

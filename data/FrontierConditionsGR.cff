@@ -60,6 +60,28 @@ include "CalibMuon/Configuration/data/CSC_FrontierDBConditions.cff"
 #
 include "CalibCalorimetry/Configuration/data/Hcal_FrontierConditions.cff"
 
+es_source hcalConditions = PoolDBESSource {
+ string timetype = "runnumber"
+ string connect ="frontier://Frontier/CMS_COND_ON_18X_HCAL"
+ PSet DBParameters = {
+ untracked int32 messageLevel = 0
+ }
+ VPSet toGet = {
+ { string record = "HcalPedestalsRcd" string tag =
+"hcal_pedestals_fC_v2_grmm" },
+ { string record = "HcalPedestalWidthsRcd" string tag =
+"hcal_widths_fC_v2_grmm" },
+ { string record = "HcalElectronicsMapRcd" string tag =
+"official_emap_v5_080208" },
+ { string record = "HcalGainsRcd" string tag =
+"hcal_gains_v2_gren_reprocessing" },
+ { string record = "HcalQIEDataRcd" string tag = "qie_normalmode_v3" }
+ }
+ }
+
+es_prefer hcalConditions = PoolDBESSource{}
+
+
 ###########################################################################################
 #
 # ECAL Frontier Conditions
