@@ -32,17 +32,16 @@ include "CalibTracker/SiStripESProducers/data/SiStripQualityFakeESSource.cfi"
 #include "CalibMuon/Configuration/data/DT_FrontierConditions.cff"
 include "CalibMuon/DTCalibration/data/DT_Calibration.cff"
 
-replace maps_frontier.connect="frontier://FrontierDev/CMS_COND_DT"
+
+replace maps_frontier.connect="frontier://Frontier/CMS_COND_ON_18X_DT"
 replace maps_frontier.toGet = {
- { string record = "DTReadOutMappingRcd"
-       string tag = "GRENmap_774" },
-   { string record = "DTT0Rcd"
-       string tag = "GRENt0" }  ,
-   { string record = "DTTtrigRcd"
-       string tag = "GRENttrigTest" } ,
-   {string record = "DTStatusFlagRcd"
-       string tag = "GRENnoise"}
-   }
+{ string record = "DTReadOutMappingRcd"
+       string tag = "map_GRUMM" },
+     { string record = "DTT0Rcd"
+       string tag = "t0_GRUMM" },
+     { string record = "DTTtrigRcd"
+       string tag = "tTrig_GRUMM" }
+ }
 es_prefer maps_frontier = PoolDBESSource{}
 
 
