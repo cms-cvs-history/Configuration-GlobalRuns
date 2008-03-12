@@ -10,12 +10,13 @@ sequence trackerGR = { siStripZeroSuppression,  siStripClusters }
 #
 ### calorimeters
 #
+
 include "RecoLocalCalo/Configuration/data/RecoLocalCalo.cff"
+include "RecoLocalCalo/EcalRecProducers/data/ecalFixedAlphaBetaFitUncalibRecHit.cfi"
 include "RecoEcal/Configuration/data/RecoEcal.cff"
 
 
-### ecal: no changes wrt standard modules
-    sequence ecal = {ecalWeightUncalibRecHit, ecalRecHit}
+    sequence ecal = {ecalFixedAlphaBetaFitUncalibRecHit, ecalWeightUncalibRecHit, ecalRecHit}
     sequence ecalClustersGR = {islandClusteringSequence,hybridClusteringSequence}
 
 ### hcal: many hacks. 
