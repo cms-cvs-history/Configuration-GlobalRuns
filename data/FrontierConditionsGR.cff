@@ -85,9 +85,9 @@ es_prefer hcalConditions = PoolDBESSource{}
 #
 # ECAL Frontier Conditions
 #
-#include "CalibCalorimetry/Configuration/data/Ecal_FrontierConditions.cff"
+include "CalibCalorimetry/Configuration/data/Ecal_FrontierConditions.cff"
 
-  es_source ecalConditions = PoolDBESSource {
+  es_source ecalConditionsGR = PoolDBESSource {
         string timetype = "runnumber"
         string connect = "frontier://Frontier/CMS_COND_ON_18x_ECAL"
         PSet DBParameters = {
@@ -115,7 +115,7 @@ es_prefer hcalConditions = PoolDBESSource{}
         }
     }
 
-es_prefer ecalConditions = PoolDBESSource{}
+es_prefer ecalConditionsGR = PoolDBESSource{}
 
 
 ############################################################################################
