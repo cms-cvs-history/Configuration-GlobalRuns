@@ -85,7 +85,38 @@ es_prefer hcalConditions = PoolDBESSource{}
 #
 # ECAL Frontier Conditions
 #
-include "CalibCalorimetry/Configuration/data/Ecal_FrontierConditions.cff"
+#include "CalibCalorimetry/Configuration/data/Ecal_FrontierConditions.cff"
+
+  es_source ecalConditions = PoolDBESSource {
+        string timetype = "runnumber"
+        string connect = "frontier://Frontier/CMS_COND_ON_18x_ECAL"
+        PSet DBParameters = {
+            untracked int32 messageLevel = 0
+        }
+        VPSet toGet = {
+            { string record = "EcalIntercalibConstantsRcd"
+                string tag = "EcalIntercalibConstants_CosmGain200" },
+            { string record = "EcalPedestalsRcd"
+                string tag = "EcalPedestals_online" },
+            { string record = "EcalADCToGeVConstantRcd"
+                string tag = "EcalADCToGeVConstant_CosmGain200" },
+            { string record = "EcalGainRatiosRcd"
+                string tag = "EcalGainRatios_trivial" },
+            { string record = "EcalWeightXtalGroupsRcd"
+                string tag = "EcalWeightXtalGroups_trivial" },
+            { string record = "EcalTBWeightsRcd"
+                string tag = "EcalTBWeights_trivial" },
+            { string record = "EcalLaserAlphasRcd"
+                string tag = "EcalLaserAlphas_trivial" },
+            { string record = "EcalLaserAPDPNRatiosRcd"
+                string tag = "EcalLaserAPDPNRatios_trivial" },
+            { string record = "EcalLaserAPDPNRatiosRefRcd"
+                string tag = "EcalLaserAPDPNRatiosRef_trivial" }
+        }
+    }
+
+es_prefer ecalConditions = PoolDBESSource{}
+
 
 ############################################################################################
 #
