@@ -61,7 +61,7 @@ module muonRPCDigis = rpcunpacker from "EventFilter/RPCRawToDigi/data/rpcUnpacke
 sequence RawToDigi = { 
                         l1CscTfEmulDigis &
                         l1DttfEmulDigis &
-                        l1GctEmulDigis &
+#                        l1GctEmulDigis &
                         l1GmtEmulDigis &
 #                        siPixelDigis &
 #                        SiStripDigis &
