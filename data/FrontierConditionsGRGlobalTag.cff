@@ -1,0 +1,29 @@
+include "CondCore/DBCommon/data/CondDBCommon.cfi"
+
+
+# the following is needed for non PoolDBESSources (fake calibrations)
+##################################################
+include "CalibTracker/Configuration/data/SiStrip_FakePedestals.cff"
+include "CalibTracker/SiStripESProducers/data/SiStripQualityFakeESSource.cfi"
+include "Geometry/DTGeometry/data/dtGeometry.cfi"
+include "Geometry/CSCGeometry/data/cscGeometry.cfi"
+replace DTGeometryESModule.applyAlignment = true
+replace CSCGeometryESModule.applyAlignment = true  
+include "CalibCalorimetry/EcalLaserCorrection/data/ecalLaserCorrectionService.cfi"
+
+es_module hcal_db_producer = HcalDbProducer {
+         untracked vstring dump = {""}
+         untracked string file = ""
+}
+es_source es_hardcode = HcalHardcodeCalibrations {untracked vstring toGet = {"GainWidths", "channelQuality"}}
+
+
+################################################## end fake calibrations
+
+
+es_source GlobalTag = PoolDBESSource {
+    using CondDBCommon
+    untracked string globaltag = "dummy"
+    untracked string BlobStreamerName = "TBufferBlobStreamingService"
+}
+
