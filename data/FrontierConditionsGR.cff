@@ -40,7 +40,7 @@ replace maps_frontier.toGet = {
      { string record = "DTT0Rcd"
        string tag = "t0_GRUMM" },
      { string record = "DTTtrigRcd"
-       string tag = "tTrig_GRUMM" }
+       string tag = "tTrig_GRUMM_080313" }
  }
 es_prefer maps_frontier = PoolDBESSource{}
 
