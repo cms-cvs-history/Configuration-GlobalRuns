@@ -3,9 +3,15 @@
     }
 
    es_prefer localUniform = UniformMagneticFieldESProducer{}
-   es_prefer magfield = XMLIdealGeometryESSource{}
+#   es_prefer magfield = XMLIdealGeometryESSource{}
   
 
-   replace SteppingHelixPropagatorAny.useMagVolumes = false
-   replace SteppingHelixPropagatorAlong.useMagVolumes = false
-   replace SteppingHelixPropagatorOpposite.useMagVolumes = false
+   replace SteppingHelixPropagatorAny.useInTeslaFromMagField = true
+   replace SteppingHelixPropagatorAlong.useInTeslaFromMagField = true
+   replace SteppingHelixPropagatorOpposite.useInTeslaFromMagField = true
+
+   replace SteppingHelixPropagatorAny.SetVBFPointer = true
+   replace SteppingHelixPropagatorAlong.SetVBFPointer = true
+   replace SteppingHelixPropagatorOpposite.SetVBFPointer = true
+
+   replace VolumeBasedMagneticFieldESProducer.label = "VolumeBasedMagneticField"
