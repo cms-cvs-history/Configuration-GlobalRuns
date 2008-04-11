@@ -5,7 +5,34 @@ include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
 include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
 include "RecoLocalTracker/SiStripZeroSuppression/data/SiStripZeroSuppression.cfi"
 include "RecoLocalTracker/SiStripClusterizer/data/SiStripClusterizer_RealData.cfi"
-sequence trackerGR = { siStripZeroSuppression,  siStripClusters }
+include "RecoLocalTracker/SiStripRecHitConverter/data/SiStripRecHitMatcher.cfi"
+include "RecoLocalTracker/SiStripRecHitConverter/data/SiStripRecHitConverter.cfi"
+include "RecoTracker/Configuration/data/RecoTrackerP5.cff"
+include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
+
+replace siStripZeroSuppression.RawDigiProducersList = {
+        {  string RawDigiProducer = "siStripDigis" string RawDigiLabel = "VirginRaw"    }
+        ,{ string RawDigiProducer = "siStripDigis" string RawDigiLabel = "ProcessedRaw" }
+        ,{ string RawDigiProducer = "siStripDigis" string RawDigiLabel = "ScopeMode"   }
+    }
+
+replace siStripClusters.DigiProducersList = {
+        { string DigiProducer = "siStripDigis"
+            string DigiLabel    = "ZeroSuppressed"
+        },
+        { string DigiProducer = "siStripZeroSuppression"
+            string DigiLabel    = "VirginRaw"
+        },
+        { string DigiProducer = "siStripZeroSuppression"
+            string DigiLabel    = "ProcessedRaw"
+        },
+        { string DigiProducer = "siStripZeroSuppression"
+            string DigiLabel    = "ScopeMode"
+        }
+    }
+
+
+sequence trackerGR = {offlineBeamSpot,  siStripZeroSuppression,  siStripClusters , siStripMatchedRecHits, tracksP5}
 
 #
 ### calorimeters
@@ -47,6 +74,6 @@ include "Configuration/GlobalRuns/data/jet-override.cff"
 
     sequence jetsGR = {caloTowersRec, recoJets}
 
-    sequence reconstructionGR = {caloGR, muonsGR,  jetsGR}
+    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
 #    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
 
