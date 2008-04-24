@@ -40,7 +40,7 @@ replace siPixelDigis.InputLabel = "source"
 #--- SiStrip ---#
 #workaround for still wrong label names 
 include "EventFilter/SiStripRawToDigi/data/SiStripDigis.cfi"
-replace SiStripDigis.ProductLabel = "source"
+replace siStripDigis.ProductLabel = "source"
 #--- Ecal ---#
 include "SimCalorimetry/EcalTrigPrimProducers/data/ecalTriggerPrimitiveDigis.cff"
 module ecalDigis = ecalEBunpacker from "EventFilter/EcalRawToDigiDev/data/EcalUnpackerData.cfi"
@@ -65,7 +65,7 @@ sequence RawToDigi = {
 #                        l1GctEmulDigis &
                         l1GmtEmulDigis &
 #                        siPixelDigis &
-#                        SiStripDigis &
+#                        siStripDigis &
                         ecalDigis &
                         ecalPreshowerDigis &
                         hcalDigis &
