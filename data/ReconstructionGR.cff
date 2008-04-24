@@ -75,5 +75,5 @@ include "Configuration/GlobalRuns/data/jet-override.cff"
     sequence jetsGR = {caloTowersRec, recoJets}
 
     sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
-#    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
+    sequence reconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR}
 

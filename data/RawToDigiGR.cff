@@ -19,7 +19,6 @@ include "Geometry/RPCGeometry/data/rpcGeometry.cfi"
 #-------------------------#
 #--- L1 Setup ---#
 include "L1TriggerConfig/L1ScalesProducers/data/L1MuTriggerScalesConfig.cff"
-include "L1TriggerConfig/L1ScalesProducers/data/L1MuTriggerPtScaleConfig.cff"
 include "L1TriggerConfig/L1ScalesProducers/data/L1MuGMTScalesConfig.cff"
 include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
 include "L1TriggerConfig/L1GtConfigProducers/data/L1GtConfig.cff"
@@ -39,8 +38,8 @@ include "EventFilter/SiPixelRawToDigi/data/SiPixelRawToDigi.cfi"
 replace siPixelDigis.InputLabel = "source"
 #--- SiStrip ---#
 #workaround for still wrong label names 
-include "EventFilter/SiStripRawToDigi/data/SiStripDigis.cfi"
-replace SiStripDigis.ProductLabel = "source"
+module siStripDigis = SiStripDigis from  "EventFilter/SiStripRawToDigi/data/SiStripDigis.cfi"
+replace siStripDigis.ProductLabel = "source"
 #--- Ecal ---#
 include "SimCalorimetry/EcalTrigPrimProducers/data/ecalTriggerPrimitiveDigis.cff"
 module ecalDigis = ecalEBunpacker from "EventFilter/EcalRawToDigiDev/data/EcalUnpackerData.cfi"
@@ -64,14 +63,27 @@ sequence RawToDigi = {
                         l1DttfEmulDigis &
 #                        l1GctEmulDigis &
                         l1GmtEmulDigis &
-#                        siPixelDigis &
-#                        SiStripDigis &
+                        siPixelDigis &
+                        siStripDigis &
                         ecalDigis &
                         ecalPreshowerDigis &
                         hcalDigis &
                         muonCSCDigis &
                         muonDTDigis &
-#                        dtunpacker &
+                        muonRPCDigis
+                     }
+sequence RawToDigi_woTracker = {
+                        l1CscTfEmulDigis &
+                        l1DttfEmulDigis &
+#                        l1GctEmulDigis &
+                        l1GmtEmulDigis &
+#                        siPixelDigis &
+#                        siStripDigis &
+                        ecalDigis &
+                        ecalPreshowerDigis &
+                        hcalDigis &
+                        muonCSCDigis &
+                        muonDTDigis &
                         muonRPCDigis
                      }
 
