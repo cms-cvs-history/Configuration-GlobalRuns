@@ -78,7 +78,7 @@ muonRPCDigis = copy.deepcopy(rpcunpacker)
 RawToDigi = cms.Sequence(l1CscTfEmulDigis+l1DttfEmulDigis+l1GmtEmulDigis+ecalDigis+ecalPreshowerDigis+hcalDigis+muonCSCDigis+muonDTDigis+muonRPCDigis)
 l1GmtEmulDigis.DaqGtInputTag = 'source'
 siPixelDigis.InputLabel = 'source'
-siStripDigis.ProductLabel = 'source'
+SiStripDigis.ProductLabel = 'source'
 ecalDigis.DoRegional = False
 muonCSCDigis.UseExaminer = False
 
