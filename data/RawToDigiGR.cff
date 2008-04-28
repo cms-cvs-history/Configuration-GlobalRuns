@@ -24,14 +24,14 @@ include "L1TriggerConfig/GctConfigProducers/data/L1GctConfig.cff"
 include "L1TriggerConfig/L1GtConfigProducers/data/L1GtConfig.cff"
 include "L1TriggerConfig/GMTConfigProducers/data/L1MuGMTParametersConfig.cff"
 #--- CSC TF ---#
-module l1CscTfEmulDigis = csctfunpacker from "EventFilter/CSCTFRawToDigi/data/csctfunpacker.cfi"
+module csctfDigis = csctfunpacker from "EventFilter/CSCTFRawToDigi/data/csctfunpacker.cfi"
 #--- DT TF ---#
-module l1DttfEmulDigis = dttfunpacker from "EventFilter/DTTFRawToDigi/data/dttfunpacker.cfi"
+module dttfDigis = dttfunpacker from "EventFilter/DTTFRawToDigi/data/dttfunpacker.cfi"
 #--- GCT/GMT ---#
-module l1GctEmulDigis = l1GctHwDigis from "EventFilter/GctRawToDigi/data/l1GctHwDigis.cfi"
-module l1GmtEmulDigis = l1GtUnpack from "EventFilter/L1GlobalTriggerRawToDigi/data/l1GtUnpack.cfi"
+module gctDigis = l1GctHwDigis from "EventFilter/GctRawToDigi/data/l1GctHwDigis.cfi"
+module gtDigis = l1GtUnpack from "EventFilter/L1GlobalTriggerRawToDigi/data/l1GtUnpack.cfi"
 
-replace l1GmtEmulDigis.DaqGtInputTag = source
+replace gtDigis.DaqGtInputTag = source
 
 #--- SiPixel ---#
 include "EventFilter/SiPixelRawToDigi/data/SiPixelRawToDigi.cfi"
@@ -59,10 +59,11 @@ include "EventFilter/DTRawToDigi/data/dtunpacker.cfi"
 module muonRPCDigis = rpcunpacker from "EventFilter/RPCRawToDigi/data/rpcUnpacker.cfi"
 
 sequence RawToDigi = { 
-                        l1CscTfEmulDigis &
-                        l1DttfEmulDigis &
-#                        l1GctEmulDigis &
-                        l1GmtEmulDigis &
+ 			csctfDigis &
+ 			dttfDigis &
+			gctDigis &
+			gtDigis &
+                     
                         siPixelDigis &
                         siStripDigis &
                         ecalDigis &
@@ -73,10 +74,10 @@ sequence RawToDigi = {
                         muonRPCDigis
                      }
 sequence RawToDigi_woTracker = {
-                        l1CscTfEmulDigis &
-                        l1DttfEmulDigis &
-#                        l1GctEmulDigis &
-                        l1GmtEmulDigis &
+                        csctfDigis &
+                        dttfDigis &
+                        gctDigis &
+                        gtDigis &
 #                        siPixelDigis &
 #                        siStripDigis &
                         ecalDigis &
