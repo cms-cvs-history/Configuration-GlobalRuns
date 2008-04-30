@@ -1,59 +1,22 @@
 
 
 # tracker
-include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
-include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
-include "RecoLocalTracker/SiStripZeroSuppression/data/SiStripZeroSuppression.cfi"
-include "RecoLocalTracker/SiStripClusterizer/data/SiStripClusterizer_RealData.cfi"
-include "RecoLocalTracker/SiStripRecHitConverter/data/SiStripRecHitMatcher.cfi"
-include "RecoLocalTracker/SiStripRecHitConverter/data/SiStripRecHitConverter.cfi"
+include "RecoLocalTracker/Configuration/data/RecoLocalTracker_Cosmics.cff"
 include "RecoTracker/Configuration/data/RecoTrackerP5.cff"
 include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
 
-replace siStripZeroSuppression.RawDigiProducersList = {
-        {  string RawDigiProducer = "siStripDigis" string RawDigiLabel = "VirginRaw"    }
-        ,{ string RawDigiProducer = "siStripDigis" string RawDigiLabel = "ProcessedRaw" }
-        ,{ string RawDigiProducer = "siStripDigis" string RawDigiLabel = "ScopeMode"   }
-    }
 
-replace siStripClusters.DigiProducersList = {
-        { string DigiProducer = "siStripDigis"
-            string DigiLabel    = "ZeroSuppressed"
-        },
-        { string DigiProducer = "siStripZeroSuppression"
-            string DigiLabel    = "VirginRaw"
-        },
-        { string DigiProducer = "siStripZeroSuppression"
-            string DigiLabel    = "ProcessedRaw"
-        },
-        { string DigiProducer = "siStripZeroSuppression"
-            string DigiLabel    = "ScopeMode"
-        }
-    }
+sequence trackerGR = {offlineBeamSpot,  striptrackerlocalreco, tracksP5}
 
-
-sequence trackerGR = {offlineBeamSpot,  siStripZeroSuppression,  siStripClusters , siStripMatchedRecHits, tracksP5}
 
 #
 ### calorimeters
 #
 
-include "RecoLocalCalo/Configuration/data/RecoLocalCalo.cff"
-include "RecoLocalCalo/EcalRecProducers/data/ecalFixedAlphaBetaFitUncalibRecHit.cfi"
+include "RecoLocalCalo/Configuration/data/RecoLocalCalo_Cosmics.cff"
 include "RecoEcal/Configuration/data/RecoEcal.cff"
 
-
-    sequence ecal = {ecalFixedAlphaBetaFitUncalibRecHit, ecalWeightUncalibRecHit, ecalRecHit}
-    sequence ecalClustersGR = {islandClusteringSequence,hybridClusteringSequence}
-
-### hcal: many hacks. 
-include "Configuration/GlobalRuns/data/hcal-override.cff"
-    # hcalZeroSuppressedDigis is defined in hcal-override.cff. There is NO cfi in the
-    # release defining it... amazing!
-    # also the configuration of hb and ho are in hcal-override but in no cfi stored in CVS
-    sequence hcal = {hcalLocalRecoSequence}
-
-    sequence caloGR = { ecal, ecalClustersGR, hcal }
+ sequence caloGR = { calolocalreco, hybridClusteringSequence }
 
 
 #
@@ -68,16 +31,15 @@ sequence muonsEndCapsGR = { muonrecoforcosmicsEndCapsOnly  }
 sequence muonsGR = {muonsAllGR,muonsBarrelGR,muonsEndCapsGR}
 #
 ### jets
-#
-include "RecoJets/Configuration/data/RecoJets.cff"
-include "RecoJets/Configuration/data/CaloTowersRec.cff"
-#include "RecoMET/Configuration/data/RecoMET.cff"
+#i
+include "RecoJets/Configuration/data/RecoCaloTowersGR.cff"
+include "RecoJets/Configuration/data/RecoJetsGR.cff"
 
-# Make jet parameter replacements suggested by Efe Yazgan on 11 Feb 2008
-include "Configuration/GlobalRuns/data/jet-override.cff"
+sequence jetsGR = {recoCaloTowersGR, recoJetsGR}
 
-    sequence jetsGR = {caloTowersRec, recoJets}
+include "RecoMET/Configuration/data/RecoMET.cff"
+sequence metrecoGR= {metreco}
 
-    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR}
-    sequence reconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR}
+    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR, metrecoGR}
+    sequence reconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR, metrecoGR}
 
