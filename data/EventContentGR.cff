@@ -15,7 +15,7 @@
 
 #  FEVTSIMDIGIHLTDEBUG FEVTSIMHLTDEBUG
 #
-#  $Id: EventContentGR.cff,v 1.1 2008/04/29 07:54:04 arizzi Exp $
+#  $Id: EventContentGR.cff,v 1.2 2008/04/30 12:40:50 arizzi Exp $
 #
 #####################################################################
 
@@ -28,7 +28,7 @@
 #####################################################################
 include "RecoTracker/Configuration/data/RecoTrackerP5_EventContent.cff"
 include "RecoMuon/Configuration/data/RecoMuonCosmics_EventContent.cff"
-include "RecoLocalMuon/Configuration/data/RecoLocalMuonCosmics_EventContent.cff"
+include "RecoLocalMuon/Configuration/data/RecoLocalMuon_EventContent.cff"
 include "RecoEcal/Configuration/data/RecoEcal_EventContentCosmics.cff"
 include "RecoLocalCalo/Configuration/data/RecoLocalCalo_EventContentCosmics.cff"
 include "RecoLocalTracker/Configuration/data/RecoLocalTracker_Cosmics_EventContent.cff"
