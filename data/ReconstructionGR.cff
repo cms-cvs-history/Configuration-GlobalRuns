@@ -14,9 +14,9 @@ sequence trackerGR = {offlineBeamSpot,  striptrackerlocalreco, tracksP5}
 #
 
 include "RecoLocalCalo/Configuration/data/RecoLocalCalo_Cosmics.cff"
-include "RecoEcal/Configuration/data/RecoEcal.cff"
+include "RecoEcal/Configuration/data/RecoEcalCosmics.cff"
 
- sequence caloGR = { calolocalreco, hybridClusteringSequence }
+ sequence caloGR = { calolocalreco, ecalClusters }
 
 
 #
