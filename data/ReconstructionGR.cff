@@ -23,16 +23,8 @@ include "RecoEcal/Configuration/data/RecoEcalCosmics.cff"
 ### muons
 include "RecoLocalMuon/Configuration/data/RecoLocalMuonCosmics.cff"
 include "RecoMuon/Configuration/data/RecoMuonCosmics.cff"
-
 sequence muonsLocalRecoGR = {muonlocalreco & muonlocalrecoNoDrift}
-sequence muonsAllGR =  {muonrecoforcosmics}
-sequence muonsBarrelGR = {muonrecoforcosmicsBarrelOnly & 
-                          muonrecoforcosmics1LegBarrelOnly &
-                          muonrecoforcosmicsNoDriftBarrelOnly}
-sequence muonsEndCapsGR = {muonrecoforcosmicsEndCapsOnly}
-
-sequence muonsGR = {muonsLocalRecoGR, muonsAllGR, 
-    muonsBarrelGR, muonsEndCapsGR, lhcMuonReco}
+sequence muonsGR = {muonsLocalRecoGR, muonRecoGR}
 
 #
 ### jets
