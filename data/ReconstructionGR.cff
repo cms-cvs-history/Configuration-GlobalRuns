@@ -24,10 +24,10 @@ include "RecoEcal/Configuration/data/RecoEcalCosmics.cff"
 include "RecoLocalMuon/Configuration/data/RecoLocalMuonCosmics.cff"
 include "RecoMuon/Configuration/data/RecoMuonCosmics.cff"
 
-sequence muonsLocalRecoGR = {muonlocalreco, muonlocalrecoNoDrift}
+sequence muonsLocalRecoGR = {muonlocalreco & muonlocalrecoNoDrift}
 sequence muonsAllGR =  {muonrecoforcosmics}
-sequence muonsBarrelGR = {muonrecoforcosmicsBarrelOnly, 
-                          muonrecoforcosmics1LegBarrelOnly,
+sequence muonsBarrelGR = {muonrecoforcosmicsBarrelOnly & 
+                          muonrecoforcosmics1LegBarrelOnly &
                           muonrecoforcosmicsNoDriftBarrelOnly}
 sequence muonsEndCapsGR = {muonrecoforcosmicsEndCapsOnly}
 
