@@ -45,6 +45,6 @@ sequence jetsGR = {recoCaloTowersGR, recoJetsGR}
 include "RecoMET/Configuration/data/RecoMET.cff"
 sequence metrecoGR= {metreco}
 
-    sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR, metrecoGR}
-    sequence reconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR, metrecoGR}
+    sequence ReconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR, metrecoGR}
+    sequence ReconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR, metrecoGR}
 
