@@ -28,7 +28,8 @@ sequence muonsAllGR = {  muonlocalreco, muonrecoforcosmics  }
 sequence muonsBarrelGR = {muonrecoforcosmicsBarrelOnly  }
 sequence muonsEndCapsGR = { muonrecoforcosmicsEndCapsOnly  }
 
-sequence muonsGR = {muonsAllGR,muonsBarrelGR,muonsEndCapsGR}
+sequence muonsGR = {muonsAllGR, muonsBarrelGR, muonsEndCapsGR, muonrecoforcosmics1LegBarrelOnly, lhcMuonReco}
+
 #
 ### jets
 #i
