@@ -6,7 +6,8 @@ include "RecoTracker/Configuration/data/RecoTrackerP5.cff"
 include "RecoVertex/BeamSpotProducer/data/BeamSpot.cff"
 
 
-sequence trackerGR = {offlineBeamSpot,  striptrackerlocalreco, tracksP5}
+sequence trackerGR = {offlineBeamSpot,  trackerlocalreco, tracksP5}
+sequence trackerGR_woPixels = {offlineBeamSpot,  striptrackerlocalreco, tracksP5}
 
 
 #
@@ -38,5 +39,6 @@ include "RecoMET/Configuration/data/RecoMET.cff"
 sequence metrecoGR= {metreco}
 
     sequence reconstructionGR = {trackerGR, caloGR, muonsGR,  jetsGR, metrecoGR}
-    sequence reconstructionGR_woTracker = { caloGR, muonlocalreco, STAmuonrecoforcosmics,  jetsGR, metrecoGR}
+    sequence reconstructionGR_woTracker = { caloGR, muonsGR,  jetsGR, metrecoGR}
+    sequence reconstructionGR_woPixels = {trackerGR_woPixels, caloGR, muonsGR,  jetsGR, metrecoGR}
 
