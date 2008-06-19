@@ -7,7 +7,6 @@ include "CondCore/DBCommon/data/CondDBSetup.cfi"
 
 #--- Geometry Setup ---#
 include "Geometry/CMSCommonData/data/cmsIdealGeometryXML.cfi"
-include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
 include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
 include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
 include "HLTrigger/Configuration/data/rawToDigi/EcalGeometrySetup.cff"
