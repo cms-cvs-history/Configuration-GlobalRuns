@@ -1,5 +1,0 @@
-#Use replacement parameters suggested by Efe Yazgan for 
-# GREN reprocessing -- Jeff T, 13 Feb 2008
-replace iterativeCone5CaloJets.coneRadius=0.15
-replace IconeJetParameters.seedThreshold=0.5
-replace towerMaker.HBThreshold = 0.6
