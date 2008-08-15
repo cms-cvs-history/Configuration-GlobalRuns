@@ -12,7 +12,9 @@ process.source = cms.Source("PoolSource",
     #firstFreeID = cms.untracked.uint32(131072),
     fileNames = cms.untracked.vstring(
         '/store/data/CRUZET3/Cosmics/RAW/v4/000/050/908/04D61810-DD54-DD11-8FB1-001617DBD230.root'
-        #'/store/data/Commissioning08/Cosmics/RAW/MW31_v1/000/053/416/68D08BC6-555E-DD11-842C-000423D9939C.root'
+       #'/store/data/CRUZET3/Cosmics/RAW/v4/000/050/908/08CDE58E-DC54-DD11-9D2A-000423D998BA.root',
+       #'/store/data/CRUZET3/Cosmics/RAW/v4/000/050/908/0EDB772A-DC54-DD11-8C5C-001617C3B77C.root',
+             #'/store/data/Commissioning08/Cosmics/RAW/MW31_v1/000/053/416/68D08BC6-555E-DD11-842C-000423D9939C.root'
     )
 )
 
@@ -23,7 +25,7 @@ process.load("Configuration.EventContent.EventContentCosmics_cff")
 process.FEVT = cms.OutputModule("PoolOutputModule",
     process.FEVTEventContent,
     dataset = cms.untracked.PSet(dataTier = cms.untracked.string('RECO')),
-    fileName = cms.untracked.string('reco2.root')
+    fileName = cms.untracked.string('promptrecoCosmics.root')
 )
 
 process.FEVT.outputCommands.append('keep CaloTowersSorted_calotoweroptmaker_*_*')
@@ -47,7 +49,7 @@ process.FEVT.outputCommands.append('keep recoCandidatesOwned_caloTowersOpt_*_*')
 process.FEVT.outputCommands.append('keep RPCDetIdRPCDigiMuonDigiCollection_muonRPCDigis_*_*')
 
 process.configurationMetadata = cms.untracked.PSet(
-    version = cms.untracked.string('$Revision: 1.6 $'),
+    version = cms.untracked.string('$Revision: 1.8 $'),
     name = cms.untracked.string('$Source: /cvs_server/repositories/CMSSW/CMSSW/Configuration/GlobalRuns/python/recoT0DQM_EvContent_cfg.py,v $'),
     annotation = cms.untracked.string('CRUZET Prompt Reco with DQM')
 )
@@ -57,7 +59,7 @@ process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) ) #
 # Conditions (Global Tag is used here):
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.connect = "frontier://PromptProd/CMS_COND_21X_GLOBALTAG"
-process.GlobalTag.globaltag = "CRZT210_V1P::All"
+process.GlobalTag.globaltag = "CRZT210_V3P::All"
 process.prefer("GlobalTag")
 
 # Magnetic fiuld: force mag field to be 0.0 tesla
