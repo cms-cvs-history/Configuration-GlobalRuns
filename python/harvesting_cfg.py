@@ -6,7 +6,7 @@ process.load("DQMServices.Components.EDMtoMEConverter_cff")
 
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.connect = "frontier://PromptProd/CMS_COND_21X_GLOBALTAG"
-process.GlobalTag.globaltag = "CRUZET4_V4P::All"
+process.GlobalTag.globaltag = "CRUZET4_V2P::All"
 process.prefer("GlobalTag")
 
 process.load("Configuration.StandardSequences.Geometry_cff")
@@ -24,7 +24,7 @@ process.options = cms.untracked.PSet(
 process.source = cms.Source("PoolSource",
 #    dropMetaData = cms.untracked.bool(True),
     processingMode = cms.untracked.string("RunsLumisAndEvents"),
-    fileNames = cms.untracked.vstring('file:promptrecoCosmics.root')
+    fileNames = cms.untracked.vstring('file:reco2.root')
 )
 
 process.maxEvents.input = -1
