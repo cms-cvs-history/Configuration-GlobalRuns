@@ -19,11 +19,11 @@ def Era_2PDs():
     alcaMap['MinimumBias']='SiStripCalMinBias+SiStripCalZeroBias+TkAlMinBias+TkAlMuonIsolated+MuAlCalIsolatedMu+MuAlOverlaps+HcalCalIsoTrk+HcalCalDijets+DtCalib+EcalCalElectron'
     return alcaMap
 
-com='cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,DQM%s  --data --magField AutoFromDBCurrent --scenario pp --datatier RECO --eventcontent RECO --customise Configuration/GlobalRuns/customise_Collision_36X.py --no_exec --python_filename=rereco_%sCollision_36X.py --conditions %s'
+com='cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,DQM%s  --data --magField AutoFromDBCurrent --scenario pp --datatier RECO --eventcontent RECO --customise Configuration/GlobalRuns/customise_Collision_37X.py --no_exec --python_filename=rereco_%sCollision_37X.py --conditions %s'
 
 import os
 
-GT='GR_R_36X_V11A::All'
+GT='GR_R_37X_V5A::All'
 alcaMap=Era_2PDs()
 for PD in alcaMap.keys():
     if (PD==''):
