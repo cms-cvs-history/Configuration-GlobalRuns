@@ -1,3 +1,11 @@
+import optparse
+
+usage="--list"
+parser = optparse.OptionParser(usage)
+parser.add_option("--GT")
+parser.add_option("--era")
+(options,args)=parser.parse_args()
+
 def Era_8PDs():
     alcaMap={}
     alcaMap['']=''
@@ -23,8 +31,9 @@ com='cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,DQM%s  --data --magField AutoFrom
 
 import os
 
-GT='GR_R_37X_V5A::All'
-alcaMap=Era_8PDs()
+#GT='GR_R_37X_V5A::All'
+
+alcaMap=globals()["Era_%ss"%(options.era)]()
 for PD in alcaMap.keys():
     c=com
     if (PD==''):
@@ -34,6 +43,6 @@ for PD in alcaMap.keys():
     else:
         alca=',ALCA:%s'%(alcaMap[PD],)
         spec=PD+"_"
-    os.system(c%(alca,spec,GT))
+    os.system(c%(alca,spec,options.GT))
 
 
